@@ -189,6 +189,13 @@ function draw(){
 		}
 	}
 	
+	context.fillStyle = 'rgb(0,0,0)';
+	context.fillRect(8, 4, 120, 20);
+
+	context.fillStyle = 'rgb(0,255,0)';
+	context.font = 'bold 16px monospace';
+	context.fillText(`Epoch: ${c}`, 10, 20);
+	
 }
 
 
