@@ -11,7 +11,7 @@
 - **Neural Networks**: Each particle uses a neural network to decide movements based on its surroundings (11x11 grid).
   - **Single Population (`11x11.js`)**: 2000 particles optimize spacing to gain health from neighbors while avoiding overcrowding.
   - **Three Populations (`rgb.js`)**: 600 particles (200 each of Red, Green, Blue) engage in a rock-paper-scissors dynamic (Red eats Green, Green eats Blue, Blue eats Red).
-- **Genetic Algorithm**: Particles evolve through crossover and mutation, with fitness based on lifetime or interaction success.
+- **Genetic Algorithm**: Particles evolve through crossover and mutation, with fitness based on lifetime or interaction success. The neural network weights of each particle are used as the genotype.
 - **Toroidal Grid**: 200x200 grid with wrap-around edges for continuous movement.
 
 ---
