@@ -4,6 +4,13 @@
 
 **Neuroparticles** is an artificial life simulation where neural network-driven particles battle for survival on a grid, evolving through genetic algorithms. Born in 2019, this project explores emergent behaviors in two flavors: a single-population system (`11x11.js`) and a three-population predator-prey dynamic (`rgb.js`). Watch particles learn to navigate, compete, and evolve in real-time on a canvas, creating mesmerizing patterns of survival and strategy.
 
+
+Demo:
+
+[11x11](https://xcont.com/neuroparticles/11x11.html)
+
+[rgb](https://xcont.com/neuroparticles/rgb.html)
+
 ---
 
 ## Features
