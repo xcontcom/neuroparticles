@@ -2,51 +2,84 @@
 
 ![Preview](images/11x11.gif)
 
-**Neuroparticles** is an artificial life simulation where neural network-driven particles battle for survival on a grid, evolving through genetic algorithms. Born in 2019, this project explores emergent behaviors in two flavors: a single-population system (`11x11.js`) and a three-population predator-prey dynamic (`rgb.js`). Watch particles learn to navigate, compete, and evolve in real-time on a canvas, creating mesmerizing patterns of survival and strategy.
+Each teeny-weeny dot is a lil organism. It sees (using a neural network) what's around it and moves depending on what it sees. If it survives long enough — it produces offspring. If not — bb lil dot, you were brave, but other dots were more brave.
 
+**Neuroparticles** is a real-time artificial life simulation based on:
 
-Demo:
+- **Neural Networks** — Each agent uses a fully connected feedforward network:
+  - **Input Layer**:
+    - `11x11.js`: 121 inputs from a single-channel 11×11 window.
+    - `rgb.js`: 363 inputs from three 11×11 channels (Red, Green, Blue).
+  - **Hidden Layer**: 25 neurons with sigmoid activation.
+  - **Output Layer**: 9 outputs corresponding to 8 movement directions + stay.
+  - **Bias terms** are included in the hidden layer.
 
-[11x11](https://xcont.com/neuroparticles/11x11.html)
+- **Genetic Algorithm**:
+  - The **genome** is a flat array of all network weights and biases.
+  - **Fitness** is measured by lifetime (survival time).
+  - **Crossover**: uniform crossover between random survivors.
+  - **Mutation**: replaces random weights with new random values.
 
-[rgb](https://xcont.com/neuroparticles/rgb.html)
-
----
-
-## Features
-
-- **Neural Networks**: Each particle uses a neural network to decide movements based on its surroundings (11x11 grid).
-  - **Single Population (`11x11.js`)**: 2000 particles optimize spacing to gain health from neighbors while avoiding overcrowding.
-  - **Three Populations (`rgb.js`)**: 600 particles (200 each of Red, Green, Blue) engage in a rock-paper-scissors dynamic (Red eats Green, Green eats Blue, Blue eats Red).
-- **Genetic Algorithm**: Particles evolve through crossover and mutation, with fitness based on lifetime or interaction success. The neural network weights of each particle are used as the genotype.
-- **Toroidal Grid**: 200x200 grid with wrap-around edges for continuous movement.
-
----
-
-## How It Works
-
-- **Grid**: A 200x200 toroidal grid, visualized as 3x3 pixel cells (600x600 canvas).
-- **Particles**:
-  - **Health Points (HP)**: Start at 10,000 (`11x11.js`) or 1,000 (`rgb.js`). Decay over time, with bonuses/penalties based on neighbors or predator-prey interactions.
-  - **Movement**: Neural network outputs choose from 9 moves (8 directions + stay). In `11x11.js`, a `stayBias` of 100 favors staying put.
-- **Evolution**: Dead particles (HP ≤ 0) are removed. New particles are created via crossover of top survivors, with random mutations to neural network weights.
-- **Neural Network**:
-  - **Input**: 121 nodes (`11x11.js`, single population) or 363 nodes (`rgb.js`, three populations) from an 11x11 grid around each particle.
-  - **Hidden Layer**: 25 nodes with sigmoid activation.
-  - **Output**: 9 nodes for movement decisions.
+- **Toroidal Grid**: 200×200 field with wraparound edges (toroidal topology).
+- **Local Perception**: Each agent only sees a limited 11×11 area centered on itself.
+- **Self-organization**: No global rules. All behavior emerges from local sensing and reproduction pressure.
 
 ---
 
-## 📄 License
+## ▶️ Demos
 
-MIT License. See [LICENSE](LICENSE) for details.
+- [11x11 Mode](https://xcont.com/neuroparticles/11x11.html) — One population learning spacing behavior.
+- [RGB Mode](https://xcont.com/neuroparticles/rgb.html) — Three populations (Red, Green, Blue) in a predator-prey cycle.
+
+---
+
+## Mode Overview
+
+### `11x11.js`
+- **Particles**: 2,000
+- **Input**: Single-channel local density
+- **Behavior**: Learn to avoid crowding and maximize HP by spacing out
+- **Bias**: Small stay-in-place reward (`stayBias = 100`)
+
+### `rgb.js`
+- **Particles**: 600 total (200 Red, 200 Green, 200 Blue)
+- **Input**: 3-channel input from Red, Green, and Blue fields
+- **Dynamic**:
+  - Red gains HP from Green, loses from Blue
+  - Green gains from Blue, loses from Red
+  - Blue gains from Red, loses from Green
+- **Behavior**: Evolving predator-prey arms race
+
+---
+
+## 🧠 Neural Network Architecture
+
+- **Input size**: `121` or `363`
+- **Hidden layer**: 25 sigmoid neurons
+- **Output size**: 9 (8 directions + stay)
+- **Activation**: `sigmoid(x) = 1 / (1 + e^(-x))`
+- **Decision**: Max output determines movement
+
+---
+
+## ⚙️ Evolution Parameters
+
+- **Genotype**: Raw neural weights + biases
+- **Crossover**: Uniform (per-gene random split)
+- **Mutation**: Random value replacement in `[-2, 2]`
+- **Selection**: Based on lifetime (survival time)
+- **Reproduction**: Best survivors create 2 children each generation
+
+---
+
+## 📜 License
+
+MIT License
 
 ---
 
 ## 👤 Author
 
-Serhii Herasymov  
+Serhii Herasymov
 
-sergeygerasimofff@gmail.com  
-
-https://github.com/xcontcom
+[GitHub](https://github.com/xcontcom)
