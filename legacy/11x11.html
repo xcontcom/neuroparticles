@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>cellular</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script type="text/javascript" src="11x11.js"></script>
+</head>
+<body>
+<div class="topbuttons">
+	<input type="button" value="Start" onClick="start();" /><input type="button" value="Stop" onClick="stop();" /><input type="button" value="One" onClick="onestep();" />
+</div>
+<div id="canv"></div>
+<div class="footerbuttons">
+	<div id="mp1">Mutations <input type="text" id="mutatepercent" value="5" /> %</div>
+	<div id="mp2">Gens <input type="text" id="mutategen" value="1" /></div>
+	<input type="button" value="Recreate" onClick="recreate();" />
+</div>
+<div id="console-log0"></div>
+<div id="console-log1"></div>
+<div id="console-log2"></div>
+<div id="console-log3"></div>
+<div id="canv2"></div>
+<script>
+	init();		
+</script>
+</body>
+</html>
