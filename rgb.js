@@ -3,9 +3,9 @@ const sizey = 200;
 const size = 3;
 
 const agents = [
-	{ id: 'R', color: [255, 0, 0], pop: [], a: [], field: [], startHp: 10000, zone: 0 },
-	{ id: 'G', color: [0, 255, 0], pop: [], a: [], field: [], startHp: 10000, zone: 1 },
-	{ id: 'B', color: [0, 0, 255], pop: [], a: [], field: [], startHp: 10000, zone: 2 },
+	{ id: 'R', color: [255, 0, 0], pop: [], a: [], field: [], startHp: 10000},
+	{ id: 'G', color: [0, 255, 0], pop: [], a: [], field: [], startHp: 10000},
+	{ id: 'B', color: [0, 0, 255], pop: [], a: [], field: [], startHp: 10000},
 ];
 
 const typesAmount = agents.length;
@@ -63,8 +63,12 @@ function init() {
 	agents.forEach(agent => {
 		agent.a = [];
 		for (let i = 0; i < populationsize; i++) {
-			const zoneY = Math.floor(agent.zone * sizey / 3);
-			agent.a[i] = [agent.startHp, Math.floor(Math.random() * sizex), zoneY + Math.floor(Math.random() * sizey / 3), 0];
+			agent.a[i] = [
+				agent.startHp,
+				Math.floor(Math.random() * sizex),
+				Math.floor(Math.random() * sizey),
+				0
+			];
 		}
 	});
 
@@ -218,11 +222,10 @@ function evolveAgent(agentIndex) {
 			}
 		});
 
-		const zoneY = Math.floor(agent.zone * sizey / 3);
 		agent.pop.push(child1, child2);
 		agent.a.push(
-			[agent.startHp, Math.floor(Math.random() * sizex), zoneY + Math.floor(Math.random() * sizey / 3), 0],
-			[agent.startHp, Math.floor(Math.random() * sizex), zoneY + Math.floor(Math.random() * sizey / 3), 0]
+			[agent.startHp, Math.floor(Math.random() * sizex), Math.floor(Math.random() * sizey), 0],
+			[agent.startHp, Math.floor(Math.random() * sizex), Math.floor(Math.random() * sizey), 0]
 		);
 	}
 }
