@@ -124,6 +124,13 @@ function sortf(c, d) {
 	else return 0;
 }
 
+function syncParams() {
+	const log3 = document.getElementById('console-log3');
+	mutation = +document.getElementById("mutatepercent").value;
+	mutategen = +document.getElementById("mutategen").value;
+	log3.innerHTML = `mutation: ${mutation}%, gens: ${mutategen}`;
+}
+
 function init(){
 	
 	mutation=document.getElementById("mutatepercent").value*1;

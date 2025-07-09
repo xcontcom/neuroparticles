@@ -12,8 +12,8 @@
 </div>
 <div id="canv"></div>
 <div class="footerbuttons">
-	<div id="mp1">Mutations <input type="text" id="mutatepercent" value="5" /> %</div>
-	<div id="mp2">Gens <input type="text" id="mutategen" value="1" /></div>
+	<div id="mp1">Mutations <input type="text" id="mutatepercent" value="5" oninput="syncParams()" /> %</div>
+	<div id="mp2">Gens <input type="text" id="mutategen" value="1" oninput="syncParams()" /></div>
 	<input type="button" value="Recreate" onClick="recreate();" />
 </div>
 <div id="console-log0"></div>
