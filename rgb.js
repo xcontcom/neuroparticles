@@ -2,7 +2,15 @@ const sizex = 200;
 const sizey = 200;
 const size = 3;
 
-const firstlayersize = 11 * 11 * 3;
+const agents = [
+	{ id: 'R', color: [255, 0, 0], pop: [], a: [], field: [], startHp: 10000, zone: 0 },
+	{ id: 'G', color: [0, 255, 0], pop: [], a: [], field: [], startHp: 10000, zone: 1 },
+	{ id: 'B', color: [0, 0, 255], pop: [], a: [], field: [], startHp: 10000, zone: 2 },
+];
+
+const typesAmount = agents.length;
+
+const firstlayersize = 11 * 11 * typesAmount;
 const secondlayersize = 25;
 const movesize = 9;
 
@@ -22,12 +30,6 @@ const crossoverRate = 0.5;
 const mutationRange = 4; // genes are random in [-2, 2]
 
 let timerId = false, c = 0;
-
-const agents = [
-	{ id: 'R', color: [255, 0, 0], pop: [], a: [], field: [], startHp: 1000, zone: 0 },
-	{ id: 'G', color: [0, 255, 0], pop: [], a: [], field: [], startHp: 1000, zone: 1 },
-	{ id: 'B', color: [0, 0, 255], pop: [], a: [], field: [], startHp: 1000, zone: 2 },
-];
 
 function recreate() {
 	agents.forEach(agent => {
@@ -86,9 +88,26 @@ function draw() {
 
 	for (let x = 0; x < sizex; x++) {
 		for (let y = 0; y < sizey; y++) {
+			/*
 			let r = agents[0].field[x][y] > 0 ? 255 : 0;
 			let g = agents[1].field[x][y] > 0 ? 255 : 0;
 			let b = agents[2].field[x][y] > 0 ? 255 : 0;
+			if (r || g || b) {
+				ctx.fillStyle = `rgb(${r},${g},${b})`;
+				ctx.fillRect(x * size, y * size, size, size);
+			}
+			*/
+			let r = 0, g = 0, b = 0;
+			agents.forEach(agent => {
+				if (agent.field[x][y] > 0) {
+					r += agent.color[0];
+					g += agent.color[1];
+					b += agent.color[2];
+				}
+			});
+			r = Math.min(r, 255);
+			g = Math.min(g, 255);
+			b = Math.min(b, 255);
 			if (r || g || b) {
 				ctx.fillStyle = `rgb(${r},${g},${b})`;
 				ctx.fillRect(x * size, y * size, size, size);
@@ -122,7 +141,7 @@ function getInputs(x, y) {
 		const yy = (y + dy + sizey) % sizey;
 		for (let dx = -5; dx <= 5; dx++) {
 			const xx = (x + dx + sizex) % sizex;
-			for (let k = 0; k < 3; k++) {
+			for (let k = 0; k < typesAmount; k++) {
 				input.push(agents[k].field[xx][yy]);
 			}
 		}
@@ -147,8 +166,8 @@ function moveByIndex(agent, index) {
 
 function evolveAgent(agentIndex) {
 	const agent = agents[agentIndex];
-	const enemies = agents[(agentIndex + 2) % 3];
-	const friends = agents[(agentIndex + 1) % 3];
+	const enemies = agents[(agentIndex + typesAmount - 1) % typesAmount];
+	const friends = agents[(agentIndex + 1) % typesAmount];
 	const survivors = [];
 
 	agent.a.forEach((a, i) => {
