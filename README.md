@@ -2,11 +2,11 @@
 
 ![Preview](images/11x11.gif)
 
-Each teeny-weeny dot is a lil organism. It sees (using a neural network) what's around it and moves depending on what it sees. If it survives long enough — it produces offspring. If not — bb lil dot, you were brave, but other dots were more brave.
+Each teeny-weeny dot is a lil organism. It sees (using a neural network) what's around it and moves depending on what it sees. If it survives long enough - it produces offspring. If not - bb lil dot, you were brave, but other dots were more brave.
 
 **Neuroparticles** is a real-time artificial life simulation based on:
 
-- **Neural Networks** — Each agent uses a fully connected feedforward network:
+- **Neural Networks** - Each agent uses a fully connected feedforward network:
   - **Input Layer**:
     - `11x11.js`: 121 inputs from a single-channel 11×11 window.
     - `rgb.js`: 363 inputs from three 11×11 channels (Red, Green, Blue).
@@ -28,8 +28,8 @@ Each teeny-weeny dot is a lil organism. It sees (using a neural network) what's 
 
 ## ▶️ Demos
 
-- [11x11 Mode](https://xcont.com/neuroparticles/11x11.html) — One population learning spacing behavior.
-- [RGB Mode](https://xcont.com/neuroparticles/rgb.html) — Three populations (Red, Green, Blue) in a predator-prey cycle.
+- [11x11 Mode](https://xcont.com/neuroparticles/11x11.html) - One population learning spacing behavior.
+- [RGB Mode](https://xcont.com/neuroparticles/rgb.html) - Three populations (Red, Green, Blue) in a predator-prey cycle.
 
 ---
 
